@@ -142,8 +142,12 @@ class SuperPoint(nn.Module):
 
         print('Loaded SuperPoint model')
 
-    def forward(self, data):
-        """ Compute keypoints, scores, descriptors for image """
+    def forward(self, data, cfg={}):
+        """Compute keypoints, scores, descriptors for image"""
+        self.config = {
+            **self.config,
+            **cfg,
+        }
         # Shared Encoder
         x = self.relu(self.conv1a(data['image']))
         x = self.relu(self.conv1b(x))
